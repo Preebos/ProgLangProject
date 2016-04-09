@@ -22,27 +22,7 @@
 
 ;; Part 1 - Warm-up
 
-(define (racketlist->mupllist list)
-  (cond
-    [(null? list) (aunit)]
-    [#t (apair (car list) (racketlist->mupllist (cdr list)))]))
-
-(define (mupllist->racketlist list)
-  (cond
-    [(equal? 1 (isaunit list)) null]
-    [#t (cons (fst list) (mupllist->racketlist (snd list)))])) ;fst NOT WORKING????
-
-(define (racketlist->mupllist rlist)
-   (cond
-     [(null? rlist) (aunit)]
-     [#t (apair (car rlist) (racketlist->mupllist (cdr rlist)))]))
-
-(define (mupllist->racketlist mlist)
-   (cond
-     [(equal? 1 (isaunit (fst mlist))) null]
-     [#t (cons (fst mlist) (mupllist->racketlist (snd mlist)))]))
-  
-  
+;; CHANGE (put your solutions here)
 
 ;; Part 2 - Implementing the language
 
@@ -69,16 +49,6 @@
                        (int-num v2)))
                (error "MUPL addition applied to non-number")))]
         ;; CHANGE add more cases here
-
-        ; fst and snd - dunno if these are right or not
-        [(fst? e)
-         (let ([v1 (eval-under-env (fst-e e) env)])
-               (car v1))]
-        [(snd? e)
-         (let ([v1 (eval-under-env (snd-e e) env)])
-               (cdr v1))]
-        
-        ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))
 
 ;; Do NOT change
