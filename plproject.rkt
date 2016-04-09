@@ -24,6 +24,18 @@
 
 ;; CHANGE (put your solutions here)
 
+(define (racketlist->mupllist rlist)
+   (cond
+     [(null? rlist) (aunit)]
+     [#t (apair (car rlist) (racketlist->mupllist (cdr rlist)))]))
+
+(define (mupllist->racketlist mlist)
+   (cond
+     [(equal? 1 (isaunit (fst mlist))) null]
+     [#t (cons (fst mlist) (mupllist->racketlist (snd mlist)))]))
+  
+  
+
 ;; Part 2 - Implementing the language
 
 ;; lookup a variable in an environment
