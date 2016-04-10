@@ -31,8 +31,7 @@
    (cond
      [(equal? 1 (isaunit mlist)) null]
      [#t (cons (fst mlist) (mupllist->racketlist (snd mlist)))]))
-  
-  
+
 
 ;; Part 2 - Implementing the language
 
@@ -59,6 +58,8 @@
                        (int-num v2)))
                (error "MUPL addition applied to non-number")))]
         ;; CHANGE add more cases here
+        [(int? e) e]
+        [(aunit? e) e]
 
         ; ifgreater
         [(ifgreater? e)
@@ -92,10 +93,10 @@
         
         ; isaunit
         [(isaunit? e)
-         (let ([v1 (eval-under-env (snd-e e) env)])
-           (if (aunit? v1)
-               (int 1)
-               (int 0)))]
+         (let ([v1 (eval-exp (isaunit-e e))])
+               (cond
+                 [(aunit? v1) (int 1)]
+                 [#t (int 0)]))]
 
         
         ;; DO NOT CHANGE else case

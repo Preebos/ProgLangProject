@@ -15,3 +15,5 @@
 (mupllist->racketlist (apair (int 3) (apair (int 4) (apair (int 9) (aunit)))))
 (eval-exp (add (int 4) (int 5)))
 ;(ifgreater (int 1) (int 2) (int 3) (int 4))
+(mupllist->racketlist (racketlist->mupllist (list (int 3) (int 4) (int 9))))
+(ifgreater (int 1) (int 2) (int 3) (int 4))
