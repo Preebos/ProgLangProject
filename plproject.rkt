@@ -22,16 +22,6 @@
 
 ;; Part 1 - Warm-up
 
-(define (racketlist->mupllist list)
-  (cond
-    [(null? list) (aunit)]
-    [#t (apair (car list) (racketlist->mupllist (cdr list)))]))
-
-(define (mupllist->racketlist list)
-  (cond
-    [(equal? 1 (isaunit list)) null]
-    [#t (cons (fst list) (mupllist->racketlist (snd list)))])) ;fst NOT WORKING????
-
 (define (racketlist->mupllist rlist)
    (cond
      [(null? rlist) (aunit)]
@@ -81,6 +71,12 @@
                                               [(> v1 v2) v3]
                                               [#t v4])]
                  [#t (error "Both e1 and e2 must be ints")]))]
+
+        ; apair
+        [(apair? e)
+         (let ([v1 (eval-under-env (apair-e1 e) env)]
+               [v2 (eval-under-env (apair-e2 e) env)])
+               (apair v1 v2))]
         
         ; fst and snd
         [(fst? e)
