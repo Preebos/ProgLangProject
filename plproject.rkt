@@ -22,16 +22,6 @@
 
 ;; Part 1 - Warm-up
 
-(define (racketlist->mupllist list)
-  (cond
-    [(null? list) (aunit)]
-    [#t (apair (car list) (racketlist->mupllist (cdr list)))]))
-
-(define (mupllist->racketlist list)
-  (cond
-    [(equal? 1 (isaunit list)) null]
-    [#t (cons (fst list) (mupllist->racketlist (snd list)))])) ;fst NOT WORKING????
-
 (define (racketlist->mupllist rlist)
    (cond
      [(null? rlist) (aunit)]
@@ -93,6 +83,14 @@
                (cond
                  [(apair? v1) (apair-e2 v1)]
                  [#t (error "Expression is not a pair")]))]
+        
+        ; isaunit
+        [(isaunit? e)
+         (let ([v1 (eval-under-env (snd-e e) env)])
+           (if (aunit? v1)
+               (int 1)
+               (int 0)))]
+
         
         ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))
