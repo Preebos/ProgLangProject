@@ -70,13 +70,29 @@
                (error "MUPL addition applied to non-number")))]
         ;; CHANGE add more cases here
 
-        ; fst and snd - dunno if these are right or not
+        ; ifgreater
+        [(ifgreater? e)
+         (let ([v1 (eval-under-env (ifgreater-e1 e) env)]
+               [v2 (eval-under-env (ifgreater-e2 e) env)]
+               [v3 (eval-under-env (ifgreater-e3 e) env)]
+               [v4 (eval-under-env (ifgreater-e4 e) env)])
+               (cond
+                 [(and (int? v1) (int? v2)) (cond
+                                              [(> v1 v2) v3]
+                                              [#t v4])]
+                 [#t (error "Both e1 and e2 must be ints")]))]
+        
+        ; fst and snd
         [(fst? e)
          (let ([v1 (eval-under-env (fst-e e) env)])
-               (car v1))]
+               (cond
+                 [(apair? v1) (apair-e1 v1)]
+                 [#t (error "Expression is not a pair")]))]
         [(snd? e)
          (let ([v1 (eval-under-env (snd-e e) env)])
-               (cdr v1))]
+               (cond
+                 [(apair? v1) (apair-e2 v1)]
+                 [#t (error "Expression is not a pair")]))]
         
         ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))
