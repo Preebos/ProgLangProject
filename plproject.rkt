@@ -70,10 +70,10 @@
 
         ; ifgreater
         [(ifgreater? e)
-         (let ([v1 (eval-under-env (ifgreater-e1 e) env)]
-               [v2 (eval-under-env (ifgreater-e2 e) env)]
-               [v3 (eval-under-env (ifgreater-e3 e) env)]
-               [v4 (eval-under-env (ifgreater-e4 e) env)])
+         (let ([v1 (eval-exp (ifgreater-e1 e))]
+               [v2 (eval-exp (ifgreater-e2 e))]
+               [v3 (eval-exp (ifgreater-e3 e))]
+               [v4 (eval-exp (ifgreater-e4 e))])
                (cond
                  [(and (int? v1) (int? v2)) (cond
                                               [(> v1 v2) v3]
