@@ -108,14 +108,18 @@
         
         ; isaunit
         [(isaunit? e)
-         (let ([v1 (eval-exp (isaunit-e e))])
+         (let ([v1 (eval-under-env (isaunit-e e) env)])
                (cond
                  [(aunit? v1) (int 1)]
                  [#t (int 0)]))]
 
         ; closure
-        ;[(closure? e)
-        ;(
+        [(closure? e)
+         (let ([en (eval-under-env (closure-env e) env)]
+               [f (eval-under-env (closure-fun e) env)])
+           (cond
+             [(fun? f) e]
+             [#t (error "second arg should be a function")]))]
 
         
         ;; DO NOT CHANGE else case
