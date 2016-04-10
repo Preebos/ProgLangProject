@@ -62,6 +62,13 @@
         [(int? e) e]
         [(aunit? e) e]
 
+        ; fun
+        ;[(fun? e)
+        ; (letrec ([s1 (fun-nameopt e)]
+        ;       [s2 (eval-under-env (fun-formal e) env)]
+        ;       [b (closure
+        
+
         ; ifgreater
         [(ifgreater? e)
          (let ([v1 (eval-under-env (ifgreater-e1 e) env)]
@@ -73,6 +80,10 @@
                                               [(> v1 v2) v3]
                                               [#t v4])]
                  [#t (error "Both e1 and e2 must be ints")]))]
+
+        ; call
+
+        ; mlet
 
         ; apair
         [(apair? e)
@@ -98,6 +109,8 @@
                (cond
                  [(aunit? v1) (int 1)]
                  [#t (int 0)]))]
+
+        ; closure
 
         
         ;; DO NOT CHANGE else case
