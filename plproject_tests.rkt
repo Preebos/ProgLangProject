@@ -1,6 +1,5 @@
 #lang racket
-(provide (all-defined-out))
-(include "plproject.rkt")
+(require "plproject.rkt")
 
 ; a test case that uses parts 1, 2, and 4
 ; should produce (list (int 10) (int 11) (int 16))

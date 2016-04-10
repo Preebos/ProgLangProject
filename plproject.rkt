@@ -1,7 +1,7 @@
 ;; CS 4003: Programming Languages, Team Project
 
-;#lang racket
-;(provide (all-defined-out)) ;; so we can put tests in a second file
+#lang racket
+(provide (all-defined-out)) ;; so we can put tests in a second file
 
 ;; definition of structures for MUPL programs - Do NOT change
 (struct var  (string) #:transparent)  ;; a variable, e.g., (var "foo")
@@ -62,6 +62,7 @@
         [(aunit? e) e]
 
         ; fun
+        
         ;[(fun? e)
         ; (letrec ([s1 (fun-nameopt e)]
         ;       [s2 (eval-under-env (fun-formal e) env)]
@@ -75,9 +76,12 @@
                [v3 (eval-under-env (ifgreater-e3 e) env)]
                [v4 (eval-under-env (ifgreater-e4 e) env)])
                (cond
-                 [(and (int? v1) (int? v2)) (cond
-                                              [(> v1 v2) v3]
-                                              [#t v4])]
+                 [(and
+                   (int? v1)
+                   (int? v2))
+                  (cond
+                    [(> (int-num v1) (int-num v2)) v3]
+                    [#t v4])]
                  [#t (error "Both e1 and e2 must be ints")]))]
 
         ; call
@@ -110,6 +114,8 @@
                  [#t (int 0)]))]
 
         ; closure
+        ;[(closure? e)
+        ;(
 
         
         ;; DO NOT CHANGE else case
