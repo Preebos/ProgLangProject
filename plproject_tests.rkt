@@ -1,6 +1,6 @@
 #lang racket
-
-(require "plproject.rkt")
+(provide (all-defined-out))
+(include "plproject.rkt")
 
 ; a test case that uses parts 1, 2, and 4
 ; should produce (list (int 10) (int 11) (int 16))
@@ -13,5 +13,5 @@
 ;test racketlist->mupllist and mupllist->racketlist
 (racketlist->mupllist (list (int 3) (int 4) (int 9)))
 (mupllist->racketlist (apair (int 3) (apair (int 4) (apair (int 9) (aunit)))))
-
-(ifgreater (int 1) (int 2) (int 3) (int 4))
+(eval-exp (add (int 4) (int 5)))
+;(ifgreater (int 1) (int 2) (int 3) (int 4))
