@@ -63,11 +63,9 @@
         [(aunit? e) e]
 
         ; fun
-        
-        ;[(fun? e)
-        ; (letrec ([s1 (fun-nameopt e)]
-        ;       [s2 (eval-under-env (fun-formal e) env)]
-        ;       [b (closure
+        [(fun? e)
+         (let ([clo (closure (fun-body e) env)])
+           clo)]
         
 
         ; ifgreater
@@ -94,9 +92,11 @@
         ;[(call? e)
         ; (let ([fe (eval-under-env (call-funexp e) env)]
         ;       [act (eval-under-env (call-actual e) env)])
-        ;       (cond
-        ;         [(closure? fe) ()]
-        ;         [#t (error "First argument must be a closure")]))]
+        ;   (cond
+        ;     [(not (closure? fe)) (error "First argument must be a closure")]
+        ;     [#t
+        ;      (let ([
+           
         
         ; mlet
 
