@@ -61,10 +61,14 @@
         ; fst and snd - dunno if these are right or not
         [(fst? e)
          (let ([v1 (eval-under-env (fst-e e) env)])
-               (car v1))]
+               (cond
+                 [(apair? v1) (apair-e1 v1)]
+                 [#t (error "Expression is not a pair")]))]
         [(snd? e)
          (let ([v1 (eval-under-env (snd-e e) env)])
-               (cdr v1))]
+               (cond
+                 [(apair? v1) (apair-e2 v1)]
+                 [#t (error "Expression is not a pair")]))]
         
         ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))
