@@ -85,8 +85,19 @@
                     [#t v4])]
                  [#t (error "Both e1 and e2 must be ints")]))]
 
+;A call evaluates its first and second subexpressions to values. If the first is not a closure, it is an error.
+;Else, it evaluates the closure’s function’s body in the closure’s environment extended to map the
+;function’s name to the closure (unless the name field is #f) and the function’s argument to the result
+;of the second subexpression.
+        
         ; call
-
+        ;[(call? e)
+        ; (let ([fe (eval-under-env (call-funexp e) env)]
+        ;       [act (eval-under-env (call-actual e) env)])
+        ;       (cond
+        ;         [(closure? fe) ()]
+        ;         [#t (error "First argument must be a closure")]))]
+        
         ; mlet
 
         ; apair
