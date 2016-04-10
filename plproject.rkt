@@ -63,7 +63,6 @@
         [(aunit? e) e]
 
         ; fun
-        
         ;[(fun? e)
         ; (letrec ([s1 (fun-nameopt e)]
         ;       [s2 (eval-under-env (fun-formal e) env)]
@@ -72,10 +71,10 @@
 
         ; ifgreater
         [(ifgreater? e)
-         (let ([v1 (eval-exp (ifgreater-e1 e))]
-               [v2 (eval-exp (ifgreater-e2 e))]
-               [v3 (eval-exp (ifgreater-e3 e))]
-               [v4 (eval-exp (ifgreater-e4 e))])
+         (let ([v1 (eval-under-env (ifgreater-e1 e) env)]
+               [v2 (eval-under-env (ifgreater-e2 e) env)]
+               [v3 (eval-under-env (ifgreater-e3 e) env)]
+               [v4 (eval-under-env (ifgreater-e4 e) env)])
                (cond
                  [(and
                    (int? v1)
@@ -99,6 +98,11 @@
         ;         [#t (error "First argument must be a closure")]))]
         
         ; mlet
+        ;[(mlet? e)
+        ; (let ([v (eval-under-env (mlet-var e) env)]
+        ;       [ex (eval-under-env (mlet-e e) env)]
+        ;       [b (eval-under-env (mlet-body e) env)])
+        ;       ())]
 
         ; apair
         [(apair? e)
