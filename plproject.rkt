@@ -1,7 +1,7 @@
 ;; CS 4003: Programming Languages, Team Project
 
-#lang racket
-(provide (all-defined-out)) ;; so we can put tests in a second file
+;#lang racket
+;(provide (all-defined-out)) ;; so we can put tests in a second file
 
 ;; definition of structures for MUPL programs - Do NOT change
 (struct var  (string) #:transparent)  ;; a variable, e.g., (var "foo")
@@ -29,10 +29,9 @@
 
 (define (mupllist->racketlist mlist)
    (cond
-     [(aunit? mlist) null]
-     [#t (cons (eval-exp (fst mlist)) (mupllist->racketlist (eval-exp (snd mlist))))]))
-  
-  
+     [(equal? 1 (isaunit mlist)) null]
+     [#t (cons (fst mlist) (mupllist->racketlist (snd mlist)))]))
+
 
 ;; Part 2 - Implementing the language
 
