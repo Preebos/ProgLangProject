@@ -85,8 +85,8 @@
 
         ; mlet
         [(mlet? e)
-         (let ([v (mlet-var e)]
-               [val (mlet-e e)]
+         (let* ([v (mlet-var e)]
+               [val (eval-under-env (mlet-e e) env]
                [newEnv (cons env (list v val))]
                [body (mlet-body e)])
            (eval-under-env body env))]
@@ -151,7 +151,7 @@
 
 (define (mlet* lstlst e2) "CHANGE")
 
-(define (ifeq e1 e2 e3 e4) (if ((= (int-num e1) (int-num e2))) (e3) (e5)))
+(define (ifeq e1 e2 e3 e4) (if ((= (int-num e1) (int-num e2))) (e3) (e4)))
 
 ;; Part 4 - Using the language
 
