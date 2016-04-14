@@ -148,7 +148,7 @@
         
 ;; Part 3 - Expanding the language
 
-(define (ifaunit e1 e2 e3) (if (isaunit? e1) (e2) (e3)))
+(define (ifaunit e1 e2 e3) (if (isaunit? e1) e2 e3))
 
 (define (mlet* lstlst e2) "CHANGE")
 
@@ -156,7 +156,9 @@
 
 ;; Part 4 - Using the language
 
-(define mupl-map "CHANGE")
+(define (mupl-map f l)
+  (cond [(aunit? l) (aunit)]
+        [#t (apair (f (fst l)) (mupl-map f (snd l)))]))
 
 (define mupl-mapAddN 
   (mlet "map" mupl-map
