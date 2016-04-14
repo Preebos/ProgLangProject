@@ -86,7 +86,7 @@
         ; mlet
         [(mlet? e)
          (let* ([v (mlet-var e)]
-               [val (eval-under-env (mlet-e e) env]
+               [val (eval-under-env (mlet-e e) env)]
                [newEnv (cons env (list v val))]
                [body (mlet-body e)])
            (eval-under-env body newEnv))]
