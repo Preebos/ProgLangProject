@@ -148,11 +148,11 @@
         
 ;; Part 3 - Expanding the language
 
-(define (ifaunit e1 e2 e3) "CHANGE")
+(define (ifaunit e1 e2 e3) (if (isaunit? e1) (e2) (e3)))
 
 (define (mlet* lstlst e2) "CHANGE")
 
-(define (ifeq e1 e2 e3 e4) "CHANGE")
+(define (ifeq e1 e2 e3 e4) (if ((= (int-num e1) (int-num e2))) (e3) (e5)))
 
 ;; Part 4 - Using the language
 
