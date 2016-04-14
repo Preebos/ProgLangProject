@@ -83,10 +83,16 @@
                     [#t v4])]
                  [#t (error "Both e1 and e2 must be ints")]))]
 
-;A call evaluates its first and second subexpressions to values. If the first is not a closure, it is an error.
-;Else, it evaluates the closure’s function’s body in the closure’s environment extended to map the
-;function’s name to the closure (unless the name field is #f) and the function’s argument to the result
-;of the second subexpression.
+        ; mlet
+        [(mlet? e)
+         (let ([v (mlet-var e)]
+               [val (mlet-e e)]
+               [newEnv (cons env (list v val))]
+               [body (mlet-body e)])
+           (eval-under-env body env))]
+           
+           
+
         
         ; call
         ;[(call? e)
@@ -96,14 +102,7 @@
         ;     [(not (closure? fe)) (error "First argument must be a closure")]
         ;     [#t
         ;      (let ([
-           
-        
-        ; mlet
-        ;[(mlet? e)
-        ; (let ([v (eval-under-env (mlet-var e) env)]
-        ;       [ex (eval-under-env (mlet-e e) env)]
-        ;       [b (eval-under-env (mlet-body e) env)])
-        ;       ())]
+
 
         ; apair
         [(apair? e)
