@@ -29,8 +29,8 @@
 
 (define (mupllist->racketlist mlist)
    (cond
-     [(equal? 1 (isaunit mlist)) null]
-     [#t (cons (fst mlist) (mupllist->racketlist (snd mlist)))]))
+     [(equal? (int 1) (eval-exp (isaunit mlist))) null]
+     [#t (cons (eval-exp (fst mlist)) (mupllist->racketlist (snd mlist)))]))
 
 
 ;; Part 2 - Implementing the language

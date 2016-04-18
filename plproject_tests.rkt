@@ -14,6 +14,9 @@
 ; expect (apair (int 3) (apair (int 4) (apair (int 9) (aunit))))
 (racketlist->mupllist (list (int 3) (int 4) (int 9)))
 
+; expect (list (int 3) (int 4) (int 9))
+(mupllist->racketlist (apair (int 3) (apair (int 4) (apair (int 9) (aunit)))))
+
 ; expect (int 3)
 (eval-exp (add (int 2) (int 1)))
 ; expect (int 102)
@@ -38,6 +41,8 @@
 (eval-exp (snd (apair (int 1) (int 2))))
 ; expect (apair (int 2) (int 3))
 (eval-exp (snd (apair (int 1) (apair (int 2) (int 3)))))
+; expect (apair (int 2) (aunit))
+(eval-exp (snd (apair (int 1) (apair (int 2) (aunit)))))
 
 ; expect (int 1)
 (eval-exp (isaunit (aunit)))
@@ -45,10 +50,6 @@
 (eval-exp (isaunit (int 1)))
 
 ;;;; tests for non-working parts:
-
-;(mupllist->racketlist (apair (int 3) (apair (int 4) (apair (int 9) (aunit)))))
-;(mupllist->racketlist (racketlist->mupllist (list (int 3) (int 4) (int 9))))
-
 
 
 
