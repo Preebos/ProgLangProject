@@ -91,9 +91,6 @@
                [body (mlet-body e)])
            (eval-under-env body newEnv))]
            
-           
-
-        
         ; call
         ;[(call? e)
         ; (let ([fe (eval-under-env (call-funexp e) env)]
@@ -102,7 +99,6 @@
         ;     [(not (closure? fe)) (error "First argument must be a closure")]
         ;     [#t
         ;      (let ([
-
 
         ; apair
         [(apair? e)
@@ -137,6 +133,14 @@
              [(fun? f) e]
              [#t (error "second arg should be a function")]))]
 
+        ; string
+        ;(struct string (s) #:transparent)
+        ; check to see if the string is a key in env, and if so return the value for that key
+        ;[(string? e)
+        ; (let ([v (eval-under-env (string-s e) env)])
+        ;       (cond
+        ;         [(aunit? v1) (int 1)]
+        ;         [#t (int 0)]))]
         
         ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))
