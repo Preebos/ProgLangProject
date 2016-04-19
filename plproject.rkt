@@ -127,8 +127,7 @@
 
         ; closure
         [(closure? e)
-         (let ([en (eval-under-env (closure-env e) env)]
-               [f (eval-under-env (closure-fun e) env)])
+         (let ([f (eval-under-env (closure-fun e) env)])
            (cond
              [(fun? f) e]
              [#t (error "second arg should be a function")]))]
