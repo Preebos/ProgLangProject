@@ -92,13 +92,19 @@
            (eval-under-env body newEnv))]
            
         ; call
-        ;[(call? e)
-        ; (let ([fe (eval-under-env (call-funexp e) env)]
-        ;       [act (eval-under-env (call-actual e) env)])
-        ;   (cond
-        ;     [(not (closure? fe)) (error "First argument must be a closure")]
-        ;     [#t
-        ;      (let ([
+        [(call? e)
+         (let ([clo (eval-under-env (call-funexp e) env)]
+               [arg (eval-under-env (call-actual e) env)])
+           (if (not (closure? clo))
+             (error "First argument must be a closure")
+             (let* ([en     (closure-env clo)]
+                    [f      (closure-fun clo)]
+                    [name   (fun-nameopt f)]
+                    [formal (fun-formal  f)]
+                    [body   (fun-body    f)])
+               (if (not name)
+                   (eval-under-env body en)
+                   (eval-under-env body (cons en (list name clo)))))))]            
 
         ; apair
         [(apair? e)
