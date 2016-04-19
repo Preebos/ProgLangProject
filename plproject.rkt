@@ -131,15 +131,6 @@
            (cond
              [(fun? f) e]
              [#t (error "second arg should be a function")]))]
-
-        ; string
-        ;(struct string (s) #:transparent)
-        ; check to see if the string is a key in env, and if so return the value for that key
-        ;[(string? e)
-        ; (let ([v (eval-under-env (string-s e) env)])
-        ;       (cond
-        ;         [(aunit? v1) (int 1)]
-        ;         [#t (int 0)]))]
         
         ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))

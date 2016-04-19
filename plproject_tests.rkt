@@ -49,7 +49,19 @@
 ; expect (int 0)
 (eval-exp (isaunit (int 1)))
 
+
+
 ;;;; tests for non-working parts:
+
+; expect (int 2)
+;(call (ifeq (int 1) (int 1) (int 2) (int 3)))
+; expect (int 3)
+;(call (ifeq (int 1) (int 2) (int 2) (int 3)))
+
+; expect (int 2)
+;(call (ifaunit (aunit) (int 2) (int 3)))
+; expect (int 3)
+;(call (ifaunit (int 1) (int 2) (int 3)))
 
 
 
