@@ -65,11 +65,11 @@
 ;(call (fun #f "x" (add (var "x") (int 7))) (int 1))
 ;(fun #f "x" (add (var "x") (int 7)))
 
-;(call mupl-map add (apair (int 1) (apair (int 2) (aunit))))
+;(call (mupl-map add (apair (int 1) (apair (int 2) (aunit)))))
 
-;(eval-exp (call (call mupl-map (int 7))
-;                (racketlist->mupllist(list (int 3) (int 4) (int 9)))))
+;(eval-exp (call (call mupl-map (int 7)) (racketlist->mupllist(list (int 3) (int 4) (int 9)))))
 
+;(call mupl-map (int 7))
 
 ;mlet*
 ;call
