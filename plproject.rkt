@@ -63,9 +63,7 @@
         [(aunit? e) e]
 
         ; fun
-        [(fun? e)
-         (let ([clo (closure (fun-body e) env)])
-           clo)]
+        [(fun? e) (closure e env)]
         
 
         ; ifgreater
@@ -160,9 +158,8 @@
 
 ;; Part 4 - Using the language
 
-(define (mupl-map f l)
-  (cond [(aunit? l) (aunit)]
-        [#t (apair (f (fst l)) (mupl-map f (snd l)))]))
+(define mupl-map "change")
+
 
 (define mupl-mapAddN 
   (mlet "map" mupl-map
