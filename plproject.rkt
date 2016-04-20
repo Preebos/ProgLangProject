@@ -69,18 +69,12 @@
         ; ifgreater
         [(ifgreater? e)
          (let ([v1 (eval-under-env (ifgreater-e1 e) env)]
-               [v2 (eval-under-env (ifgreater-e2 e) env)]
-               [v3 (eval-under-env (ifgreater-e3 e) env)]
-               [v4 (eval-under-env (ifgreater-e4 e) env)])
-               (cond
-                 [(and
-                   (int? v1)
-                   (int? v2))
-                  (cond
-                    [(> (int-num v1) (int-num v2)) v3]
-                    [#t v4])]
-                 [#t (error "Both e1 and e2 must be ints")]))]
-
+               [v2 (eval-under-env (ifgreater-e2 e) env)])
+           (if (and (int? v1) (int? v2))
+               (if (> (int-num v1) (int-num v2))
+                   (eval-under-env (ifgreater-e3 e) env)
+                   (eval-under-env (ifgreater-e4 e) env))
+               (error "First two args must be ints")))]
         ; mlet
         [(mlet? e)
          (let  ([name (mlet-var e)]
