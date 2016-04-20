@@ -63,31 +63,24 @@
         [(aunit? e) e]
 
         ; fun
-        [(fun? e) (closure e env)]
+        [(fun? e) (closure env e)]
         
 
         ; ifgreater
         [(ifgreater? e)
          (let ([v1 (eval-under-env (ifgreater-e1 e) env)]
-               [v2 (eval-under-env (ifgreater-e2 e) env)]
-               [v3 (eval-under-env (ifgreater-e3 e) env)]
-               [v4 (eval-under-env (ifgreater-e4 e) env)])
-               (cond
-                 [(and
-                   (int? v1)
-                   (int? v2))
-                  (cond
-                    [(> (int-num v1) (int-num v2)) v3]
-                    [#t v4])]
-                 [#t (error "Both e1 and e2 must be ints")]))]
-
+               [v2 (eval-under-env (ifgreater-e2 e) env)])
+           (if (and (int? v1) (int? v2))
+               (if (> (int-num v1) (int-num v2))
+                   (eval-under-env (ifgreater-e3 e) env)
+                   (eval-under-env (ifgreater-e4 e) env))
+               (error "First two args must be ints")))]
         ; mlet
         [(mlet? e)
-         (let* ([v (mlet-var e)]
-               [val (eval-under-env (mlet-e e) env)]
-               [newEnv (cons env (list v val))]
-               [body (mlet-body e)])
-           (eval-under-env body newEnv))]
+         (let  ([name (mlet-var e)]
+                [val (eval-under-env (mlet-e e) env)]
+                [body (mlet-body e)])
+           (eval-under-env body (cons (cons name val) env)))]
            
         ; call
         [(call? e)
@@ -99,10 +92,12 @@
                     [f      (closure-fun clo)]
                     [name   (fun-nameopt f)]
                     [formal (fun-formal  f)]
+                    [fa     (cons formal arg)]
+                    [nc     (cons name clo)]
                     [body   (fun-body    f)])
                (if (not name)
-                   (eval-under-env body en)
-                   (eval-under-env body (cons en (list name clo)))))))]            
+                   (eval-under-env body (cons fa en))
+                   (eval-under-env body (cons fa (cons nc en)))))))]
 
         ; apair
         [(apair? e)
@@ -165,10 +160,11 @@
                        (aunit)
                        (apair
                         (call (var "fun") (fst (var "hd")))
-                        (call (var "loop") (snd (var "hd"))))))))
+                        (call (var "rec") (snd (var "hd"))))))))
 
 
 (define mupl-mapAddN 
   (mlet "map" mupl-map
-        "CHANGE (notice map is now in MUPL scope)"))
+        (fun #f "added"
+             (call (var "map") (fun #f "i" (add (var "added") (var "i")))))))
 
