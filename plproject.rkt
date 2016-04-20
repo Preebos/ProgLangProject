@@ -156,7 +156,7 @@
     [#t (let ([hd (car lstlst)])
           (mlet (car hd) (cdr hd) (mlet* (cdr lstlst) e2)))]))
 
-(define (ifeq e1 e2 e3 e4) (if ((= (int-num e1) (int-num e2))) (e3) (e4)))
+(define (ifeq e1 e2 e3 e4) (if (= (int-num e1) (int-num e2)) (e3) (e4)))
 
 ;; Part 4 - Using the language
 
