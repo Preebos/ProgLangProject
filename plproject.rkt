@@ -152,7 +152,7 @@
         
 ;; Part 3 - Expanding the language
 
-(define (ifaunit e1 e2 e3) (if (isaunit? e1) e2 e3))
+(define (ifaunit e1 e2 e3) (if (= 1 (int-num (eval-exp (isaunit e1)))) e2 e3))
 
 (define (mlet* lstlst e2) "CHANGE")
 
