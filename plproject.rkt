@@ -158,7 +158,14 @@
 
 ;; Part 4 - Using the language
 
-(define mupl-map "change")
+(define mupl-map
+  (fun #f "fun"
+       (fun "rec" "hd"
+            (ifgreater (isaunit (var "hd")) (int 0)
+                       (aunit)
+                       (apair
+                        (call (var "fun") (fst (var "hd")))
+                        (call (var "loop") (snd (var "hd"))))))))
 
 
 (define mupl-mapAddN 
