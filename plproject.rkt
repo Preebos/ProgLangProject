@@ -91,9 +91,6 @@
                [body (mlet-body e)])
            (eval-under-env body newEnv))]
            
-           
-
-        
         ; call
         [(call? e)
          (let ([clo (eval-under-env (call-funexp e) env)]
@@ -108,7 +105,6 @@
                (if (not name)
                    (eval-under-env body en)
                    (eval-under-env body (cons en (list name clo)))))))]            
-
 
         ; apair
         [(apair? e)
@@ -141,7 +137,6 @@
            (cond
              [(fun? f) e]
              [#t (error "second arg should be a function")]))]
-
         
         ;; DO NOT CHANGE else case
         [#t (error "bad MUPL expression")]))
