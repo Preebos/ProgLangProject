@@ -147,9 +147,14 @@
         
 ;; Part 3 - Expanding the language
 
-(define (ifaunit e1 e2 e3) (if (= 1 (int-num (eval-exp (isaunit e1)))) e2 e3))
+(define (ifaunit e1 e2 e3)
+  (ifgreater (isaunit e1) (int 0) e2 e3))
 
-(define (mlet* lstlst e2) "CHANGE")
+(define (mlet* lstlst e2)
+  (cond
+    [(null? lstlst) e2]
+    [#t (let ([hd (car lstlst)])
+          (mlet (car hd) (cdr hd) (mlet* (cdr lstlst) e2)))])
 
 (define (ifeq e1 e2 e3 e4) (if ((= (int-num e1) (int-num e2))) (e3) (e4)))
 
