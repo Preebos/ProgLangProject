@@ -1,15 +1,7 @@
 #lang racket
 (require "plproject.rkt")
 
-; a test case that uses parts 1, 2, and 4
-; should produce (list (int 10) (int 11) (int 16))
-(define test1
-  (mupllist->racketlist
-   (eval-exp (call (call mupl-mapAddN (int 7))
-                   (racketlist->mupllist 
-                    (list (int 3) (int 4) (int 9)))))))
-
-;;;; tests for working parts:
+;;;; simple tests:
 
 ; expect (apair (int 3) (apair (int 4) (apair (int 9) (aunit))))
 (racketlist->mupllist (list (int 3) (int 4) (int 9)))
@@ -59,29 +51,22 @@
 ; expect (int 3)
 (eval-exp (ifeq (int 1) (int 2) (int 2) (int 3)))
 
-;;;; tests for non-working parts:
 
-;(call (closure '() (fun #f "x" (add (var "x") (int 7)))) (int 1))
-;(call (fun #f "x" (add (var "x") (int 7))) (int 1))
-;(fun #f "x" (add (var "x") (int 7)))
+;;;; more complex tests:
 
-;(call (mupl-map add (apair (int 1) (apair (int 2) (aunit)))))
+; a test case that uses parts 1, 2, and 4
+; should produce (list (int 10) (int 11) (int 16))
+(define test1
+  (mupllist->racketlist
+   (eval-exp (call (call mupl-mapAddN (int 7))
+                   (racketlist->mupllist 
+                    (list (int 3) (int 4) (int 9)))))))
+test1
 
-;(eval-exp (call (call mupl-map (int 7)) (racketlist->mupllist(list (int 3) (int 4) (int 9)))))
-
-;(call mupl-map (int 7))
-
-;mlet*
-;call
-;etc?
-;the maps
-
-
-
-
-
-
-
-
-
-
+; expect (list (int -4) (int -3) (int 2))
+(define test2
+  (mupllist->racketlist
+   (eval-exp (call (call mupl-mapAddN (int -7))
+                   (racketlist->mupllist 
+                    (list (int 3) (int 4) (int 9)))))))
+test2
